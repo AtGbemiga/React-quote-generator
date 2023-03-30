@@ -15,23 +15,23 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <div id="root" id="fcc-test-runner"></div>
     
-    <script type="text/babel">
+  <script type="text/babel">
         const quotesArr = [
   {
     quote: "ho ho ho",
     author: "bop"
   },
   {
-    quote: "ho ho o",
-    author: "op"
+    quote: "70o ho ho",
+    author: "90op"
   },
   {
-    quote: "o ho ho",
-    author: "bo"
+    quote: "awes ho",
+    author: "bop5"
   },
   {
-    quote: "ho ho ",
-    author: "bope"
+    quote: "958o",
+    author: "vdp"
   }
 ]
 
@@ -51,6 +51,17 @@ const RandomAuthVal = (props) => {
   )
 }
 
+const getRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
+
+
 const Myapp = () => {
   const [quote, setQuote] = React.useState(quotesArr[0].quote);
   const [author, setAuthor] = React.useState(quotesArr[0].author);
@@ -59,35 +70,40 @@ const Myapp = () => {
     const randomIndex = Math.floor(Math.random() * quotesArr.length);
     setQuote(quotesArr[randomIndex].quote);
     setAuthor(quotesArr[randomIndex].author);
+    const bgColor = getRandomColor();
+    document.getElementById("main").style.backgroundColor = bgColor;
+    document.getElementById("text").style.color = bgColor;
+    document.getElementById("author").style.color = bgColor;
   }
 
   return (
-    <div className="bg-danger" style={{height: "100vh"}} /*parent div*/>
-      <div id="quote-box" style={{height: "40vh" }} className="container-lg col-6 bg-primary d-flex justify-content-center align-items-center "/*margin here like mt-5 to create a space between this div and it's top parent div*/>
-        <section className="bg-white text-center" style={{width: "100%", height: "auto"} }>
+    <main id="main" style={{height: "100vh"}} /*parent div. bg-danger*/>
+      <div id="quote-box" style={{height: "40vh" }} className="container-lg col-6 d-flex justify-content-center align-items-center"/*margin here like mt-5 to create a space between this div and it's top parent div bg-primary*/>
+        <section className="bg-white text-center rounded p-5 mt-5" style={{width: "100%", height: "auto"} }>
           <div id="text" className="fw-bold fs-2">
-          "{quote}.
+            "{quote}.
           </div>
           <span id="author" className="d-block text-end lead">
             -{author}
           </span>
           <div className="d-flex justify-content-between align-items-center mt-5" >
             <div className="fs-1">
-              <a href="https://twitter.com/intent/tweet" id="tweet-quote" className="text-decoration-none"><i class="bi bi-twitter"></i></a>
+              <a href="https://twitter.com/intent/tweet" id="tweet-quote" className="text-decoration-none"><i className="bi bi-twitter"></i></a>
             </div>
             <button type="button" className="btn btn-success align-middle" id="new-quote" onClick={handleClick}>New Quote</button>
           </div>
         </section>
       </div>
       <span className="d-flex justify-content-center mt-5">by Gbemiga</span>
-    </div>
+    </main>
     
   )
 }
 
 
         const domContainer = document.querySelector('#root');
-        ReactDOM.render(<Myapp />, domContainer);
+        const myRoot = ReactDOM.createRoot(domContainer)
+        myRoot.render(<Myapp />);
     </script>
     
 </body>
