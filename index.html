@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React quote maker</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+<body>
+    <!--<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>-->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <div id="root" id="fcc-test-runner"></div>
+    
+    <script type="text/babel">
+        const quotesArr = [
+  {
+    quote: "ho ho ho",
+    author: "bop"
+  },
+  {
+    quote: "ho ho o",
+    author: "op"
+  },
+  {
+    quote: "o ho ho",
+    author: "bo"
+  },
+  {
+    quote: "ho ho ",
+    author: "bope"
+  }
+]
+
+const RandomQuotVal = (props) => { 
+  return (
+    <>
+      {props.quotesArr[Math.floor(Math.random() * props.quotesArr.length)].quote}
+    </>
+  )
+}
+
+const RandomAuthVal = (props) => {
+  return (
+    <>
+      {props.quotesArr[Math.floor(Math.random() * props.quotesArr.length)].author}
+    </>
+  )
+}
+
+const Myapp = () => {
+  const [quote, setQuote] = React.useState(quotesArr[0].quote);
+  const [author, setAuthor] = React.useState(quotesArr[0].author);
+
+  const handleClick = () => {
+    const randomIndex = Math.floor(Math.random() * quotesArr.length);
+    setQuote(quotesArr[randomIndex].quote);
+    setAuthor(quotesArr[randomIndex].author);
+  }
+
+  return (
+    <div className="bg-danger" style={{height: "100vh"}} /*parent div*/>
+      <div id="quote-box" style={{height: "40vh" }} className="container-lg col-6 bg-primary d-flex justify-content-center align-items-center "/*margin here like mt-5 to create a space between this div and it's top parent div*/>
+        <section className="bg-white text-center" style={{width: "100%", height: "auto"} }>
+          <div id="text" className="fw-bold fs-2">
+          "{quote}.
+          </div>
+          <span id="author" className="d-block text-end lead">
+            -{author}
+          </span>
+          <div className="d-flex justify-content-between align-items-center mt-5" >
+            <div className="fs-1">
+              <a href="https://twitter.com/intent/tweet" id="tweet-quote" className="text-decoration-none"><i class="bi bi-twitter"></i></a>
+            </div>
+            <button type="button" className="btn btn-success align-middle" id="new-quote" onClick={handleClick}>New Quote</button>
+          </div>
+        </section>
+      </div>
+      <span className="d-flex justify-content-center mt-5">by Gbemiga</span>
+    </div>
+    
+  )
+}
+
+
+        const domContainer = document.querySelector('#root');
+        ReactDOM.render(<Myapp />, domContainer);
+    </script>
+    
+</body>
+</html>
