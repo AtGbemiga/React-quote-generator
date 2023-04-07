@@ -11,96 +11,121 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <body>
-    <!--<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>-->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <div id="root" id="fcc-test-runner"></div>
-    
+    <div id="root"></div>
   <script type="text/babel">
-        const quotesArr = [
-  {
-    quote: "ho ho ho",
-    author: "bop"
-  },
-  {
-    quote: "70o ho ho",
-    author: "90op"
-  },
-  {
-    quote: "awes ho",
-    author: "bop5"
-  },
-  {
-    quote: "958o",
-    author: "vdp"
-  }
-]
+    const quotesArr = [
+    {
+      quote: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+      author: "Nelson Mandela"
+    },
+    {
+      quote: "The way to get started is to quit talking and begin doing.",
+      author: "Walt Disney"
+    },
+    {
+      quote: "Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma – which is living with the results of other people's thinking.",
+      author: "Steve Jobs"
+    },
+    {
+      quote: "If life were predictable it would cease to be life, and be without flavor.",
+      author: "Eleanor Roosevelt"
+    },
+    {
+      quote: "If you look at what you have in life, you'll always have more. If you look at what you don't have in life, you'll never have enough.",
+      author: "Oprah Winfrey"
+    },
+    {
+      quote: "If you set your goals ridiculously high and it's a failure, you will fail above everyone else's success.",
+      author: "James Cameron"
+    },
+    {
+      quote: "Life is what happens when you're busy making other plans.",
+      author: "John Lennon"
+    },
+    {
+      quote: "Spread love everywhere you go. Let no one ever come to you without leaving happier.",
+      author: "Mother Teresa"
+    },
+    {
+      quote: "When you reach the end of your rope, tie a knot in it and hang on.",
+      author: "Franklin D. Roosevelt"
+    }
+  ]
 
-const RandomQuotVal = (props) => { 
-  return (
-    <>
-      {props.quotesArr[Math.floor(Math.random() * props.quotesArr.length)].quote}
-    </>
-  )
-}
-
-const RandomAuthVal = (props) => {
-  return (
-    <>
-      {props.quotesArr[Math.floor(Math.random() * props.quotesArr.length)].author}
-    </>
-  )
-}
-
-const getRandomColor = () => {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
-
-
-
-const Myapp = () => {
-  const [quote, setQuote] = React.useState(quotesArr[0].quote);
-  const [author, setAuthor] = React.useState(quotesArr[0].author);
-
-  const handleClick = () => {
-    const randomIndex = Math.floor(Math.random() * quotesArr.length);
-    setQuote(quotesArr[randomIndex].quote);
-    setAuthor(quotesArr[randomIndex].author);
-    const bgColor = getRandomColor();
-    document.getElementById("main").style.backgroundColor = bgColor;
-    document.getElementById("text").style.color = bgColor;
-    document.getElementById("author").style.color = bgColor;
+  const RandomQuotVal = (props) => { 
+    return (
+      <>
+        {props.quotesArr[Math.floor(Math.random() * props.quotesArr.length)].quote}
+      </>
+    )
   }
 
-  return (
-    <main id="main" style={{height: "100vh"}} /*parent div. bg-danger*/>
-      <div id="quote-box" style={{height: "40vh" }} className="container-lg col-6 d-flex justify-content-center align-items-center"/*margin here like mt-5 to create a space between this div and it's top parent div bg-primary*/>
-        <section className="bg-white text-center rounded p-5 mt-5" style={{width: "100%", height: "auto"} }>
-          <div id="text" className="fw-bold fs-2">
-            "{quote}.
-          </div>
-          <span id="author" className="d-block text-end lead">
-            -{author}
-          </span>
-          <div className="d-flex justify-content-between align-items-center mt-5" >
-            <div className="fs-1">
-              <a href="https://twitter.com/intent/tweet" id="tweet-quote" className="text-decoration-none"><i className="bi bi-twitter"></i></a>
+  const RandomAuthVal = (props) => {
+    return (
+      <>
+        {props.quotesArr[Math.floor(Math.random() * props.quotesArr.length)].author}
+      </>
+    )
+  }
+
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return (
+      color
+    );
+  };
+
+
+
+  const Myapp = () => {
+    const [quote, setQuote] = React.useState(quotesArr[0].quote);
+    const [author, setAuthor] = React.useState(quotesArr[0].author);
+
+    React.useEffect(() => {
+      const bgColor = getRandomColor();
+      document.getElementById("main").style.backgroundColor = bgColor;
+      document.getElementById("text").style.color = bgColor;
+      document.getElementById("author").style.color = bgColor;
+    }, [])
+
+    const handleClick = () => {
+      const randomIndex = Math.floor(Math.random() * quotesArr.length);
+      setQuote(quotesArr[randomIndex].quote);
+      setAuthor(quotesArr[randomIndex].author);
+      const bgColor = getRandomColor();
+      document.getElementById("main").style.backgroundColor = bgColor;
+      document.getElementById("text").style.color = bgColor;
+      document.getElementById("author").style.color = bgColor;
+    }
+
+    return (
+      <main id="main"  style={{height: "100vh", width: "100vw"}}>
+        <div id="quote-box" style={{minHeight: "40vh", height: "fit-content" }} className="container-lg col-lg-6 col-md-6 col-sm-12 col-xs-6 d-flex justify-content-center align-items-center">
+          <section className="bg-white text-center rounded p-5 mt-5" style={{width: "100%", height: "auto", boxSizing: "border-box"} }>
+            <div id="text" className="fw-bold fs-2">
+              "{quote}.
             </div>
-            <button type="button" className="btn btn-success align-middle" id="new-quote" onClick={handleClick}>New Quote</button>
-          </div>
-        </section>
-      </div>
-      <span className="d-flex justify-content-center mt-5">by Gbemiga</span>
-    </main>
-    
-  )
-}
-
-
+            <span id="author" className="d-block text-end lead">
+              -{author}
+            </span>
+            <div className="d-flex justify-content-between align-items-center mt-5" >
+              <div className="fs-1">
+                <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`"${quote}" - ${author}`)}`} target="_blank" rel="noopener noreferrer" id="tweet-quote" className="text-decoration-none"><i className="bi bi-twitter"></i></a>
+              </div>
+              <button type="button" className="btn btn-success align-middle" id="new-quote" onClick={handleClick}>New Quote</button>
+            </div>
+          </section>
+        </div>
+        <div className="d-flex justify-content-center mt-5">by Gbemiga</div>
+      </main>
+      
+    )
+  }
         const domContainer = document.querySelector('#root');
         const myRoot = ReactDOM.createRoot(domContainer)
         myRoot.render(<Myapp />);
